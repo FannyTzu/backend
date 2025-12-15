@@ -1,33 +1,38 @@
 let pages = [
- {
+  {
     "id": 1,
     "description": " Brillant étudiant en mythologie, vous ne vous attendiez pas à passer des vacances dans un château perdu au fond de la Transylvanie. A la recherche de Dracula, vous avez été kidnappé par trois individus et livré à un denommé 'Otto', il vous enferme dans un sous sol du chateau de Goraya et vous indique que son maitre va vous tuez. Vous êtes prisonnier depuis plusieurs jours sans pouvoir compter, Otto vient de temps à autre vous jeter un bout de pain et vous intimidez. Vous n'avez vu personne d 'autres. \n De toute évidence, seul Otto peut être d'une aide quelconque.  ",
     "choices": [
-      { "label": "Vous hurlez pour le faire venir", "nextId": 59 },
-      { "label": "Attendre son prochain passage", "nextId": 194 }
+      { "label": "Vous hurlez pour le faire venir", "nextId": 59, "available": true },
+      { "label": "Attendre son prochain passage", "nextId": 194, "available": true }
     ]
   },
   {
     "id": 2,
     "description": "",
     "choices": [
-      { "label": "", "nextId": 3 },
+      { "label": "", "nextId": 3, "available": true },
       {
         "label": "",
-        "nextId": 3
+        "nextId": 3,
+        "available": false, "conditions": [
+          { "type": "item", "value": "" },
+          { "type": "money", "value": 0 },
+          { "type": "dice", "value": 0 }
+        ]
       }
     ]
   },
   {
     "id": 21,
     "description": "Otto n est en fait pas très solide, il dit tout ce qu il sait et il ne sait pas grand chose. Il a été embauché il ya deux ans comme géolier et il 'a meme jamais rencontré le maitre, il est sonné par les coups que vou lui avez donné.",
-    "choices": [{ "label": "Vous fuyer et vite ! ", "nextId": 73 }]
+    "choices": [{ "label": "Vous fuyer et vite ! ", "nextId": 73, "available": true }]
   },
   {
     "id": 36,
     "description": "Le sac contient une clé en fer, sur laqueklle est gravé le chiffre 9, une boite d'allumette et un feutre que vous pouvez emporter avec vous, ainsi que le sac, si vous en êtes démuni.",
     "choices": [
-      { "label": "Vous reprenez votre chemin dans le couloir", "nextId": 391 }
+      { "label": "Vous reprenez votre chemin dans le couloir", "nextId": 391, "available": true }
     ],
     "items": [
       { "weapons": "", "power": 0, "dé": 0 },
@@ -41,32 +46,32 @@ let pages = [
     "choices": [
       {
         "label": "Vous souhaitez voir ce qu'ils vendent (si vous en avez les moyens)",
-        "nextId": 131
+        "nextId": 131, "available": true
       },
       {
         "label": "Vous n'avez pas d'argent, vous quittez les lieux par la porte qui se trouve à l'autre bout de la pièce",
-        "nextId": 157
+        "nextId": 157, "available": true
       },
       {
         "label": "Vous tentez une attaque sur les deux hommes",
-        "nextId": 284
+        "nextId": 284, "available": true
       }
     ]
   },
   {
     "id": 59,
     "description": "Vous interrompez Otto dans son repas, il se venge et vous frappe, vous perdez 3 points de vie",
-    "choices": [{ "label": "vous souffez dans la cellule", "nextId": 194 }],
+    "choices": [{ "label": "vous souffez dans la cellule", "nextId": 194, "available": true }],
     "impact": [{ "endurance": -3 }, { "money": 0 }]
   },
   {
     "id": 73,
     "description": "ALors que vous alliez quitter la cellue, Otto vous supplie de le liberez, vous vous moquez de lui et vous vous engoufrez dans un couloir éclairé par rangé d'ampoule à la lumière vacillante. Vous ressentez que le Mal est omniprésent en ces lieux. Sur la droite, le couloir se termine sur une porte entrebâillée, alors que sur votre gauche,il se poursuit hors de portée de votre regard. ",
     "choices": [
-      { "label": "Vous allez à droite", "nextId": 255 },
+      { "label": "Vous allez à droite", "nextId": 255, "available": true },
       {
         "label": "Vous allez à gauche",
-        "nextId": 93
+        "nextId": 93, "available": true
       }
     ]
   },
@@ -74,10 +79,10 @@ let pages = [
     "id": 93,
     "description": "Bien que la tetntation soit forte de repasser dans la cellule d'Otto pour lui donner un coup de pied, vous pressez le pas dans le couloir. Vous parcourez une cinquantaine de mètres, jusqu'à arriver à la hauteur d'une portion de mur couverte de graffitis 'Ils sont là !' ou encore 'Nous sommes damnés !' il y en a bien d autres et tracés dans des langues qui vous sont incconues. Vous continuez et vous retrouvez face à un sac de toile noire pendu à un crochet.",
     "choices": [
-      { "label": "Vous regardez ce qu'il contient.", "nextId": 36 },
+      { "label": "Vous regardez ce qu'il contient.", "nextId": 36, "available": true },
       {
         "label": "Vous ne vous attardez pas.",
-        "nextId": 391
+        "nextId": 391, "available": true
       }
     ]
   },
@@ -87,15 +92,15 @@ let pages = [
     "choices": [
       {
         "label": "Vous tendez l'argent à Boris",
-        "nextId": 229
+        "nextId": 229, "available": true
       },
       {
         "label": "Vous ne souhaitez pas payer, vous quittez les lieux par la porte qui se trouve à l'autre bout de la pièce",
-        "nextId": 157
+        "nextId": 157, "available": true
       },
       {
         "label": "Vous tentez une attaque sur les deux hommes",
-        "nextId": 284
+        "nextId": 284, "available": true
       }
     ]
   },
@@ -103,17 +108,17 @@ let pages = [
     "id": 157,
     "description": "La porte s'ouvre sur un autre couloir aux murs blancs, éclairés par la lumières blafardes de néons. rle mur de gauche, une insciption attire aussitôt votre attention. 'A l'aide' est écrit grossièrement en rouge sombre; du sang, à n'en pas douter. Un peu plus loin, vous débouchez dans un nouveau couloir",
     "choices": [
-      { "label": "Vous allez vers la gauche", "nextId": 103 },
+      { "label": "Vous allez vers la gauche", "nextId": 103, "available": true },
       {
         "label": "Vous allez vers la droite",
-        "nextId": 265
+        "nextId": 265, "available": false
       }
     ]
   },
   {
     "id": 178,
     "description": "La boite contien un petit canif, 15 pièces et une pelote de ficelle, vous rangez tout ça dans votre sac et regagnez le couloir.",
-    "choices": [{ "label": "Vous regagnez le couloir", "nextId": 93 }],
+    "choices": [{ "label": "Vous regagnez le couloir", "nextId": 93, "available": true }],
     "items": [
       { "weapons": "canif", "power": 2, "dé": 1 },
       { "money": 15 },
@@ -124,10 +129,10 @@ let pages = [
     "id": 194,
     "description": "Plusieurs heures s'écoule et Otto est de retour, vous decidez de tenter votre chance",
     "choices": [
-      { "label": "Vous tentez de le frapper à la tête", "nextId": 299 },
+      { "label": "Vous tentez de le frapper à la tête", "nextId": 299, "available": false },
       {
         "label": "Vous essayer de le neutraliser par une bonne prise au corps",
-        "nextId": 345
+        "nextId": 345, "available": true
       }
     ]
   },
@@ -137,11 +142,11 @@ let pages = [
     "choices": [
       {
         "label": "Vous demandez à Boris si quelchose dans la réserve peut vous etre utile",
-        "nextId": 329
+        "nextId": 329, "available": true
       },
       {
         "label": "Vous quittez les lieux par la porte qui se trouve à l'autre bout de la pièce",
-        "nextId": 157
+        "nextId": 157, "available": true
       }
     ],
     "impact": [{ "endurance": 0 }, { "money": -10 }]
@@ -150,10 +155,10 @@ let pages = [
     "id": 255,
     "description": "Vous arrivez dans la chambre d'Otto, son repas miteux mijote, vous avez tellement faim que cela vous donne envie",
     "choices": [
-      { "label": "Vous terminiez le repas", "nextId": 317 },
+      { "label": "Vous terminiez le repas", "nextId": 317, "available": true },
       {
         "label": "Vous allez à droite quittez les lieux",
-        "nextId": 93
+        "nextId": 93, "available": true
       }
     ]
   },
@@ -161,10 +166,10 @@ let pages = [
     "id": 317,
     "description": "Bien que le repas ne correspond pas à vos habitudes, vous le dévorez sans en laissez une miette, vous gagnez deux points de vie. Votre regard apperçoit une petite boite métallique qui a roulé sous le fourneau",
     "choices": [
-      { "label": "Si vous êtes curieux, vous ouvrez la boite", "nextId": 178 },
+      { "label": "Si vous êtes curieux, vous ouvrez la boite", "nextId": 178, "available": true },
       {
         "label": "Vous ne perdez pas de temps et poursuivez votre chemin",
-        "nextId": 93
+        "nextId": 93, "available": true
       }
     ],
     "impact": [{ "endurance": 2 }, { "money": 0 }]
@@ -174,12 +179,12 @@ let pages = [
     "description": "Boris vous fait la liste de ce qu'il a",
     "choices": [
       {
-        "label": "Maintenantv, vous demandez à Boris s'il vend aussi des provisions",
-        "nextId": 28
+        "label": "Maintenant, vous demandez à Boris s'il vend aussi des provisions",
+        "nextId": 28, "available": false
       },
       {
         "label": "Vous poursuivez votre chemin par la porte au fond de la réserve",
-        "nextId": 157
+        "nextId": 157, "available": true
       }
     ],
     "impact": [{ "endurance": 2 }, { "money": 0 }]
@@ -188,24 +193,24 @@ let pages = [
     "id": 345,
     "description": "Vous attaquez Otto et ça fonctionne ! il tombe et s'assome, vous en proftez pour voler les clés et vous libérez, c'est peut le moment pour lui poser quelques questions ?",
     "choices": [
-      { "label": "Vous l'attachez et décidez de l'interroger", "nextId": 21 },
-      { "label": "Vous quittez ce cachot en courant !", "nextId": 73 }
+      { "label": "Vous l'attachez et décidez de l'interroger", "nextId": 21, "available": true },
+      { "label": "Vous quittez ce cachot en courant !", "nextId": 73, "available": true }
     ]
   },
   {
     "id": 391,
-    "description": "Au bout de ce couloir se truve une porte. VOus pouvez entendre des bruits de pas. Vous n'avez pas d'autres choix, vous devez découvrir ce qu'il y a derrière. Vous ouvrez la porte et tombez sur une vaste réserve, dans laquelle un homme, une ordinateur portable entre les mains, est en train de prendre des notes. Agê d'une trentaine d'année, il a le crane rasé et est d'una apparence musculeuse, portant une combinaison orange et rangers noires '-Tiens,tiens, dit-il en vus fixant comme si vou étiez l'une de ses étagères. Jusqu'à aujourd'hui, personne ne s'était échappé des souterrains d'Otto. Vous pourriez me fournir une seule bonne raison de pas donner l'alerte ? Avant même que vous ne puissiez répondre, il reprend :'L'argent ! Le pognon ! Et vite ! Au fait moi c'est Boris..' '-Et moi Gregor', poursuit une vois rauque venant de la gauche ",
+    "description": "Au bout de ce couloir se trouve une porte. VOus pouvez entendre des bruits de pas. Vous n'avez pas d'autres choix, vous devez découvrir ce qu'il y a derrière. Vous ouvrez la porte et tombez sur une vaste réserve, dans laquelle un homme, une ordinateur portable entre les mains, est en train de prendre des notes. Agê d'une trentaine d'année, il a le crane rasé et est d'una apparence musculeuse, portant une combinaison orange et rangers noires '-Tiens,tiens, dit-il en vus fixant comme si vou étiez l'une de ses étagères. Jusqu'à aujourd'hui, personne ne s'était échappé des souterrains d'Otto. Vous pourriez me fournir une seule bonne raison de pas donner l'alerte ? Avant même que vous ne puissiez répondre, il reprend :'L'argent ! Le pognon ! Et vite ! Au fait moi c'est Boris..' '-Et moi Gregor', poursuit une vois rauque venant de la gauche ",
     "choices": [
       {
         "label": "Vous apercevez une porte et tentez de courir pour l'atteindre",
-        "nextId": 157
+        "nextId": 157, "available": true
       },
       {
         "label": "Vous décidez de dicuter avec ces deux hommes",
-        "nextId": 51
+        "nextId": 51, "available": true
       }
     ]
   }
 ];
 
-module.exports = { pages };
+export { pages };
