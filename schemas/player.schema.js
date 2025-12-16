@@ -16,8 +16,8 @@ const playerSchema = playerStatsSchema.extend({
   userId: z.number().int().positive()
 });
 
-const finalPlayerSchema = playerSchema.extend({
-  status: z.enum(["alive", "dead", "finished"])
-});
+// const finalPlayerSchema = playerSchema.extend({
+//   status: z.enum(["alive", "dead", "finished"])
+// });
 
-export { playerBaseSchema, playerStatsSchema, playerSchema, finalPlayerSchema };
+export { playerBaseSchema, playerStatsSchema, playerSchema };
