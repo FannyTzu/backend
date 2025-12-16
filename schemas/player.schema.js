@@ -9,6 +9,7 @@ const playerBaseSchema = z.object({
 
 const playerStatsSchema = playerBaseSchema.extend({
   money: z.number().int().optional(),
+  weapons: z.array(z.string()).optional(),
   inventory: z.array(z.string()).optional()
 });
 

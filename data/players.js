@@ -6,7 +6,8 @@ let players = [
     "currentPageId": 12,
     "endurance": 18,
     "money": 7,
-    "inventory": ["dague", "torche"]
+    "weapons": ["épée", "arc"],
+    "inventory": ["torche", "clé"]
   }]
 
 export { players };
