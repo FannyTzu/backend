@@ -13,13 +13,16 @@ export const getPlayerById = (req, res) => {
   res.json(player);
 };
 
-export const createPlayer = (req, res) => {
-  const newPlayer = {
-    id: Date.now(),
-    ...req.validatedBody,
-  };
-  players.push(newPlayer);
-  res.status(201).json(newPlayer);
+export const createPlayer = async (req, res) => {
+  const { name } = req.body;
+  const userId = req.userId;
+
+  const result = await pool.query(
+    "INSERT INTO players (name, endurance, money, weapons, stuff, currentPageId, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+    [name, 40, 0, '{}', '{}', 1, userId]
+  );
+
+  res.status(201).json(result.rows[0]);
 };
 
 export const updatePlayer = (req, res) => {
