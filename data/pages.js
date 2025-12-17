@@ -108,7 +108,7 @@ let pages = [
     "id": 157,
     "description": "La porte s'ouvre sur un autre couloir aux murs blancs, éclairés par la lumières blafardes de néons. rle mur de gauche, une insciption attire aussitôt votre attention. 'A l'aide' est écrit grossièrement en rouge sombre; du sang, à n'en pas douter. Un peu plus loin, vous débouchez dans un nouveau couloir",
     "choices": [
-      { "label": "Vous allez vers la gauche", "nextId": 103, "available": true },
+      { "label": "Vous allez vers la gauche", "nextId": 103, "available": false },
       {
         "label": "Vous allez vers la droite",
         "nextId": 265, "available": false
