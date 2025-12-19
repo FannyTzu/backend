@@ -45,7 +45,7 @@ export const createPlayer = async (req, res) => {
   console.log("REQ BODY:", req.body);
 
   try {
-    const { name } = req.body; // Utiliser body car le middleware valide mais ne crée pas validatedBody
+    const { name } = req.body;
     const userId = req.userId;
 
     console.log("Nom du player:", name);
@@ -115,7 +115,6 @@ export const deletePlayer = async (req, res) => {
 };
 
 //endpoint to apply a choice and update player state
-
 export const applyChoice = async (req, res) => {
   try {
     const playerId = Number(req.params.id);
@@ -178,4 +177,20 @@ export const applyChoice = async (req, res) => {
     console.error(err);
     res.status(500).json({ message: "Erreur application du choix" });
   }
+};
+
+//1 user 1 player
+export const getMyPlayer = async (req, res) => {
+  const userId = req.userId;
+
+  const result = await pool.query(
+    "SELECT * FROM players WHERE user_id = $1 LIMIT 1",
+    [userId]
+  );
+
+  if (result.rows.length === 0) {
+    return res.status(404).json({ message: "Aucun player trouvé" });
+  }
+
+  res.json(result.rows[0]);
 };
