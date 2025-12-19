@@ -15,7 +15,10 @@ const PORT = 3001;
 app.use(express.json());
 
 // Middleware CORS pour autoriser le front
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
 // Routes
 app.use("/pages", pagesRoutes);
