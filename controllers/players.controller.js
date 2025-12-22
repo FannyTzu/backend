@@ -40,16 +40,10 @@ export const getPlayerById = async (req, res) => {
 
 
 export const createPlayer = async (req, res) => {
-  console.log("=== CRÉATION PLAYER ===");
-  console.log("REQ USER ID:", req.userId);
-  console.log("REQ BODY:", req.body);
 
   try {
     const { name } = req.body;
     const userId = req.userId;
-
-    console.log("Nom du player:", name);
-    console.log("User ID:", userId);
 
     const result = await pool.query(
       `INSERT INTO players 
@@ -121,7 +115,6 @@ export const applyChoice = async (req, res) => {
     const { nextPageId } = req.body;
     const userId = req.userId;
 
-    // 1️⃣ Récupérer le player
     const playerResult = await pool.query(
       "SELECT * FROM players WHERE id = $1 AND user_id = $2",
       [playerId, userId]
@@ -133,13 +126,12 @@ export const applyChoice = async (req, res) => {
 
     const player = playerResult.rows[0];
 
-    // 2️⃣ Récupérer la page
+
     const page = pages.find(p => p.id === nextPageId);
     if (!page) {
       return res.status(404).json({ message: "Page non trouvée" });
     }
 
-    // 3️⃣ Calculer les nouveaux états
     let endurance = player.endurance;
     let money = player.money;
     let weapons = [...player.weapons];
@@ -156,7 +148,7 @@ export const applyChoice = async (req, res) => {
       if (item.stuff) stuff.push(...item.stuff);
     });
 
-    // 4️⃣ Mise à jour BDD
+    // update BDD
     const updated = await pool.query(
       `UPDATE players 
       SET endurance = $1,
