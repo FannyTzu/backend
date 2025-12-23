@@ -101,7 +101,7 @@ export const deletePlayer = async (req, res) => {
       return res.status(404).json({ message: "Player non trouvé" });
     }
 
-    res.json(result.rows[0]);
+    res.json({ message: "Player supprimé avec succès", player: result.rows[0] });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Erreur suppression player" });
