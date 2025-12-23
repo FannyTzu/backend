@@ -22,8 +22,13 @@ const createPlayerSchema = z.object({
   name: z.string().min(1).max(30)
 });
 
+// Schéma pour la mise à jour - seulement le nom est requis
+const updatePlayerSchema = z.object({
+  name: z.string().min(1).max(30)
+});
+
 // const finalPlayerSchema = playerSchema.extend({
 //   status: z.enum(["alive", "dead", "finished"])
 // });
 
-export { playerBaseSchema, playerStatsSchema, playerSchema, createPlayerSchema };
+export { playerBaseSchema, playerStatsSchema, playerSchema, createPlayerSchema, updatePlayerSchema };

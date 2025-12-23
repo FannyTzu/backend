@@ -7,7 +7,7 @@ import {
   deletePlayer,
   getMyPlayer
 } from "../controllers/players.controller.js";
-import { playerSchema, createPlayerSchema } from "../schemas/player.schema.js";
+import { playerSchema, createPlayerSchema, updatePlayerSchema } from "../schemas/player.schema.js";
 import { validateSchema } from "../middlewares/validateSchema.js";
 import { applyChoice } from "../controllers/players.controller.js";
 import { verifyToken } from "../middlewares/auth.middleware.js";
@@ -21,8 +21,8 @@ router.get("/me", verifyToken, getMyPlayer);
 router.get("/", verifyToken, getAllPlayers);
 router.get("/:id", verifyToken, getPlayerById);
 router.post("/", verifyToken, validateSchema(createPlayerSchema), createPlayer);
-router.put("/:id", validateSchema(playerSchema), updatePlayer);
-router.delete("/:id", deletePlayer);
+router.put("/:id", verifyToken, validateSchema(updatePlayerSchema), updatePlayer);
+router.delete("/:id", verifyToken, deletePlayer);
 
 //apply choice route
 router.post("/:id/choice", verifyToken, applyChoice);
