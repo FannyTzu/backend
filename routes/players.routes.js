@@ -5,7 +5,8 @@ import {
   createPlayer,
   updatePlayer,
   deletePlayer,
-  getMyPlayer
+  getMyPlayer,
+  resetPlayer
 } from "../controllers/players.controller.js";
 import { playerSchema, createPlayerSchema, updatePlayerSchema } from "../schemas/player.schema.js";
 import { validateSchema } from "../middlewares/validateSchema.js";
@@ -26,4 +27,8 @@ router.delete("/:id", verifyToken, deletePlayer);
 
 //apply choice route
 router.post("/:id/choice", verifyToken, applyChoice);
+
+//reset player route
+router.post("/:id/reset", verifyToken, resetPlayer);
+
 export default router;

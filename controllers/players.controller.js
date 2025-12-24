@@ -186,3 +186,35 @@ export const getMyPlayer = async (req, res) => {
 
   res.json(result.rows[0]);
 };
+
+// Reset player to initial state
+export const resetPlayer = async (req, res) => {
+  try {
+    const playerId = Number(req.params.id);
+    const userId = req.userId;
+
+    const result = await pool.query(
+      `UPDATE players 
+      SET endurance = $1,
+          money = $2,
+          weapons = $3,
+          stuff = $4,
+          current_page_id = $5
+      WHERE id = $6 AND user_id = $7
+       RETURNING *`,
+      [40, 0, [], [], 1, playerId, userId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Player non trouvé" });
+    }
+
+    res.json({
+      message: "Partie remise à zéro avec succès",
+      player: result.rows[0]
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur reset player" });
+  }
+};
