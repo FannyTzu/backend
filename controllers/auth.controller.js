@@ -43,3 +43,28 @@ export const login = async (req, res) => {
     res.status(500).json({ message: "Erreur serveur" });
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    await pool.query("DELETE FROM players WHERE user_id = $1", [userId]);
+
+    const result = await pool.query(
+      "DELETE FROM users WHERE id = $1 RETURNING id, email",
+      [userId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    }
+
+    res.json({
+      message: "Compte supprimé avec succès",
+      user: result.rows[0]
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur suppression compte" });
+  }
+};
