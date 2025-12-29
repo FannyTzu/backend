@@ -129,7 +129,7 @@ let pages = [
     "id": 194,
     "description": "Plusieurs heures s'écoule et Otto est de retour, vous decidez de tenter votre chance",
     "choices": [
-      { "label": "Vous tentez de le frapper à la tête", "nextId": 299, "available": false },
+      { "label": "Vous tentez de le frapper à la tête", "nextId": 299, "available": true },
       {
         "label": "Vous essayer de le neutraliser par une bonne prise au corps",
         "nextId": 345, "available": true
@@ -161,6 +161,15 @@ let pages = [
         "nextId": 93, "available": true
       }
     ]
+  },
+  {
+    "id": 299,
+    "description": "Gêné par les chaines qui vous entravent et affaibli par la faim, votre attaque est un échec cuisant. Otto vous assène un coup violent à la tête. - Tu vas me payer ça ! Le crâne fracassé, vous perdez connaissance. Vous vous réveillerez plus tard, dans une pièce blanche, les néons vous aveuglent, vous entendez des grognemente et apercevez des zombies ! Un homme vétu d une blouse blanche s'approche de vous, il tient un seringue contenenant un liquide rouge et vous l'injecte. -Bon travail, dit-il avec un petit rire en voyant que vous vous transformez déjà en zombie. Dans peu de temps, vous ferez partie de l'armée de zombies de Gringrich Yurr. Vous pouvez en être fier.",
+    "autoEffect": {
+      "type": "DEATH",
+      "reason": "TURNED_INTO_ZOMBIE",
+      "deathTextId": "quick_death"
+    }
   },
   {
     "id": 317,

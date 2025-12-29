@@ -126,10 +126,20 @@ export const applyChoice = async (req, res) => {
 
     const player = playerResult.rows[0];
 
-
     const page = pages.find(p => p.id === nextPageId);
     if (!page) {
       return res.status(404).json({ message: "Page non trouvée" });
+    }
+
+    let status = "OK";
+    let deathReason = null;
+    let deathTextId = null;
+
+    if (page.autoEffect?.type === "DEATH" && !page.description) {
+
+      status = "DEAD";
+      deathReason = page.autoEffect.reason;
+      deathTextId = page.autoEffect.deathTextId;
     }
 
     let endurance = player.endurance;
@@ -164,6 +174,9 @@ export const applyChoice = async (req, res) => {
     res.json({
       player: updated.rows[0],
       page,
+      status,
+      deathReason,
+      deathTextId
     });
   } catch (err) {
     console.error(err);
