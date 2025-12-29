@@ -168,7 +168,7 @@ let pages = [
     "autoEffect": {
       "type": "DEATH",
       "reason": "TURNED_INTO_ZOMBIE",
-      "deathTextId": "death_zombie_army"
+      "deathTextId": "quick_death"
     }
   },
   {

@@ -174,6 +174,9 @@ export const applyChoice = async (req, res) => {
     res.json({
       player: updated.rows[0],
       page,
+      status,
+      deathReason,
+      deathTextId
     });
   } catch (err) {
     console.error(err);
