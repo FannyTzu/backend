@@ -22,6 +22,10 @@ let pages = [
         ]
       }
     ]
+  }, {
+    "id": 13,
+    "description": "A peine avez vous un pas en direction de l'armoire que vous voyez ses deux portes s'ouvrir à la volée, laissant surgir deux immondes créatures ! Revetus de guenilles, les deux monstres se ruent sur vous, cherchant à vous saisir de leurs mains sanguinolentes et couvertes de pustules. Ils vous fixent de leurs yeux rouge sang. Des Zombies ! Vous avez affaires à des Zombies ! Impossibles de vous enfuir, vous combattez les deux monstres !",
+    "choices": [{ "label": "Vous fuyer et vite ! ", "nextId": 235, "available": false }]
   },
   {
     "id": 21,
@@ -87,6 +91,17 @@ let pages = [
     ]
   },
   {
+    "id": 103,
+    "description": "Le couloir se termine sr une porte à l aspect massif, peinte en blanc, de derrière laquelle ne provient aucun bruit.",
+    "choices": [
+      { "label": "Vous tentez de l'ouvrir", "nextId": 378, "available": true },
+      {
+        "label": "Vous préférez rebrousser chemin et partir dans la direction opposée",
+        "nextId": 265, "available": false
+      }
+    ]
+  },
+  {
     "id": 131,
     "description": "- Une sage décision marmonna Boris, un sourire malin au coin des lèvres. Tu es probablement curieux d'apprendre ce qui se trame dans ce château ? Pour 10 pièces, tu sauras tout. ",
     "choices": [
@@ -108,7 +123,7 @@ let pages = [
     "id": 157,
     "description": "La porte s'ouvre sur un autre couloir aux murs blancs, éclairés par la lumières blafardes de néons. rle mur de gauche, une insciption attire aussitôt votre attention. 'A l'aide' est écrit grossièrement en rouge sombre; du sang, à n'en pas douter. Un peu plus loin, vous débouchez dans un nouveau couloir",
     "choices": [
-      { "label": "Vous allez vers la gauche", "nextId": 103, "available": false },
+      { "label": "Vous allez vers la gauche", "nextId": 103, "available": true },
       {
         "label": "Vous allez vers la droite",
         "nextId": 265, "available": false
@@ -204,6 +219,13 @@ let pages = [
     "choices": [
       { "label": "Vous l'attachez et décidez de l'interroger", "nextId": 21, "available": true },
       { "label": "Vous quittez ce cachot en courant !", "nextId": 73, "available": true }
+    ]
+  }, {
+    "id": 378,
+    "description": "La porte s'ouvre sur une petite buanderie. DAns un coin se dresse une haute et imposante armoire blanche, à côté de laquelle se trouvent un baquet renversé, ainsi que deux balais et une serpillère. Un panier en plastique déborde de linge sale. En dessous vous pouvez voir une machine à laver ainsi qu'un sèche linge. Contre le mur à gauche de la porte, il y a un vieux sac noir juste à côté d'une rangée de chaussures.",
+    "choices": [
+      { "label": "Vous ouvrez le sac", "nextId": 291, "available": false },
+      { "label": "Vous préférez ouvrir l'armoire pour trouver quelque chose d'utile", "nextId": 13, "available": true }
     ]
   },
   {
