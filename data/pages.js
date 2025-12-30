@@ -250,7 +250,7 @@ let pages = [
     "id": 235,
     "description": "Vous vous débarassez desdeux zombies qui à lévidence n'étaient pas les plus nerveux. Mais vous êtes bien conscient que si vous ne trouvez pas une arme, vous ne viendrez pas à bout d'une horde. Les ecartant du pied, vous vous approchez de l'armoire, vous trouvez une trousse de soin qui vous fait gagner 4 points d'endurance, vous trouvez également 2 boites de balles.",
     "choices": [
-      { "label": "Vous sortez de la buanderie et retournez dans le couloir", "nextId": 265, "available": false }
+      { "label": "Vous sortez de la buanderie et retournez dans le couloir", "nextId": 265, "available": true }
     ],
     "impact": [{ "endurance": 4 }, { "money": 0 }],
     "items": [
@@ -258,7 +258,15 @@ let pages = [
       { "money": 0 },
       { "stuff": [""] }
     ]
+  }, {
+    "id": 265,
+    "description": "Dans le mur droit, vous remarquez une petite porte qui ne doit pas dépasser un mètre de haut, et qui n'est fermée que par un simple loquet.",
+    "choices": [
+      { "label": "Vous l'ouvrez", "nextId": 84, "available": false },
+      { "label": "Vous préférez ne pas prendre de risque et poursuivez votre chemin dans le couloir", "nextId": 202, "available": false }
+    ],
   },
+
   {
     "id": 391,
     "description": "Au bout de ce couloir se trouve une porte. VOus pouvez entendre des bruits de pas. Vous n'avez pas d'autres choix, vous devez découvrir ce qu'il y a derrière. Vous ouvrez la porte et tombez sur une vaste réserve, dans laquelle un homme, une ordinateur portable entre les mains, est en train de prendre des notes. Agê d'une trentaine d'année, il a le crane rasé et est d'una apparence musculeuse, portant une combinaison orange et rangers noires '-Tiens,tiens, dit-il en vus fixant comme si vou étiez l'une de ses étagères. Jusqu'à aujourd'hui, personne ne s'était échappé des souterrains d'Otto. Vous pourriez me fournir une seule bonne raison de pas donner l'alerte ? Avant même que vous ne puissiez répondre, il reprend :'L'argent ! Le pognon ! Et vite ! Au fait moi c'est Boris..' '-Et moi Gregor', poursuit une vois rauque venant de la gauche ",
