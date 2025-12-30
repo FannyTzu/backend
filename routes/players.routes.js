@@ -6,7 +6,8 @@ import {
   updatePlayer,
   deletePlayer,
   getMyPlayer,
-  resetPlayer
+  resetPlayer,
+  rollCombatDice
 } from "../controllers/players.controller.js";
 import { playerSchema, createPlayerSchema, updatePlayerSchema } from "../schemas/player.schema.js";
 import { validateSchema } from "../middlewares/validateSchema.js";
@@ -30,5 +31,8 @@ router.post("/:id/choice", verifyToken, applyChoice);
 
 //reset player route
 router.post("/:id/reset", verifyToken, resetPlayer);
+
+//roll combat dice route
+router.post("/:id/roll-dice", verifyToken, rollCombatDice);
 
 export default router;

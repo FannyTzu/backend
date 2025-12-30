@@ -131,6 +131,28 @@ export const applyChoice = async (req, res) => {
       return res.status(404).json({ message: "Page non trouvée" });
     }
 
+    if (page.combat) {
+      const combatState = {
+        pageId: page.id,
+        enemyType: page.combat.enemies.type,
+        remainingEnemies: page.combat.enemies.count,
+        enemyPower: page.combat.enemies.power,
+        diceFaces: page.combat.dice.faces
+      };
+
+      const updatedPlayer = await pool.query(
+        "UPDATE players SET combat_state = $1 WHERE id = $2 RETURNING *",
+        [combatState, playerId]
+      );
+
+      return res.json({
+        status: "COMBAT_STARTED",
+        combat: combatState,
+        player: updatedPlayer.rows[0],
+        page
+      });
+    }
+
     let status = "OK";
     let deathReason = null;
     let deathTextId = null;
@@ -230,4 +252,84 @@ export const resetPlayer = async (req, res) => {
     console.error(err);
     res.status(500).json({ message: "Erreur reset player" });
   }
+};
+
+export const rollCombatDice = async (req, res) => {
+  const playerId = Number(req.params.id);
+  const userId = req.userId;
+
+  // 1️⃣ Récupérer le joueur et le combat en cours
+  const result = await pool.query(
+    "SELECT endurance, combat_state FROM players WHERE id = $1 AND user_id = $2",
+    [playerId, userId]
+  );
+
+  const player = result.rows[0];
+  if (!player.combat_state) {
+    return res.status(400).json({ message: "Pas de combat en cours" });
+  }
+
+  let { remainingEnemies, enemyPower, diceFaces, pageId } = player.combat_state;
+
+  // 2️⃣ Lancer de dé
+  const roll = Math.floor(Math.random() * diceFaces) + 1;
+
+  // 3️⃣ Dégâts : nombre d’ennemis tués
+  const kills = Math.min(roll, remainingEnemies);
+  remainingEnemies -= kills;
+
+  // 4️⃣ Contre-attaque : dégâts subis
+  let enduranceLoss = remainingEnemies * enemyPower;
+  let newEndurance = player.endurance - enduranceLoss;
+
+  const page = pages.find(p => p.id === pageId);
+
+  // 5️⃣ Défaite
+  if (newEndurance <= 0) {
+    await pool.query(
+      "UPDATE players SET endurance = 0, combat_state = NULL, status = 'DEAD' WHERE id = $1",
+      [playerId]
+    );
+
+    return res.json({
+      status: "DEAD",
+      deathTextId: page.onLose.deathTextId,
+      roll,
+      kills
+    });
+  }
+
+  // 6️⃣ Victoire
+  if (remainingEnemies <= 0) {
+    await pool.query(
+      "UPDATE players SET combat_state = NULL, endurance = $1, current_page_id = $2 WHERE id = $3",
+      [newEndurance, page.onWin, playerId]
+    );
+
+    return res.json({
+      status: "COMBAT_WON",
+      roll,
+      kills,
+      nextPageId: page.onWin
+    });
+  }
+
+  // 7️⃣ Combat continue
+  const newCombatState = {
+    ...player.combat_state,
+    remainingEnemies
+  };
+
+  await pool.query(
+    "UPDATE players SET combat_state = $1, endurance = $2 WHERE id = $3",
+    [newCombatState, newEndurance, playerId]
+  );
+
+  return res.json({
+    status: "COMBAT_CONTINUE",
+    roll,
+    kills,
+    remainingEnemies,
+    endurance: newEndurance
+  });
 };

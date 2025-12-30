@@ -24,9 +24,27 @@ let pages = [
     ]
   }, {
     "id": 13,
-    "description": "A peine avez vous un pas en direction de l'armoire que vous voyez ses deux portes s'ouvrir à la volée, laissant surgir deux immondes créatures ! Revetus de guenilles, les deux monstres se ruent sur vous, cherchant à vous saisir de leurs mains sanguinolentes et couvertes de pustules. Ils vous fixent de leurs yeux rouge sang. Des Zombies ! Vous avez affaires à des Zombies ! Impossibles de vous enfuir, vous combattez les deux monstres !",
-    "choices": [{ "label": "Vous fuyer et vite ! ", "nextId": 235, "available": false }]
-  },
+    "description": "A peine avez-vous fait un pas vers l'armoire que les portes s'ouvrent brutalement. Deux zombies surgissent et se ruent sur vous ! Impossible de fuir, vous devez combattre.",
+    "choices": [],
+    "combat": {
+      "state": "ONGOING",
+      "enemies": {
+        "type": "ZOMBIE",
+        "count": 7,
+        "power": 1
+      },
+      "dice": {
+        "faces": 6,
+        "weaponBonus": true
+      }
+    },
+    "onWin": 235,
+    "onLose": {
+      "type": "DEATH",
+      "deathTextId": "death_zombie_eaten"
+    }
+  }
+  ,
   {
     "id": 21,
     "description": "Otto n est en fait pas très solide, il dit tout ce qu il sait et il ne sait pas grand chose. Il a été embauché il ya deux ans comme géolier et il 'a meme jamais rencontré le maitre, il est sonné par les coups que vou lui avez donné.",
@@ -226,6 +244,19 @@ let pages = [
     "choices": [
       { "label": "Vous ouvrez le sac", "nextId": 291, "available": false },
       { "label": "Vous préférez ouvrir l'armoire pour trouver quelque chose d'utile", "nextId": 13, "available": true }
+    ]
+  },
+  {
+    "id": 235,
+    "description": "Vous vous débarassez desdeux zombies qui à lévidence n'étaient pas les plus nerveux. Mais vous êtes bien conscient que si vous ne trouvez pas une arme, vous ne viendrez pas à bout d'une horde. Les ecartant du pied, vous vous approchez de l'armoire, vous trouvez une trousse de soin qui vous fait gagner 4 points d'endurance, vous trouvez également 2 boites de balles.",
+    "choices": [
+      { "label": "Vous sortez de la buanderie et retournez dans le couloir", "nextId": 265, "available": false }
+    ],
+    "impact": [{ "endurance": 4 }, { "money": 0 }],
+    "items": [
+      { "weapons": "munitions", "power": 2, "dé": 1 },
+      { "money": 0 },
+      { "stuff": [""] }
     ]
   },
   {
