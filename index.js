@@ -16,14 +16,16 @@ app.use(express.json());
 
 // Middleware CORS pour autoriser le front
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true
+  origin: process.env.FRONTEND_URL || "*",
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Routes
-app.use("/pages", pagesRoutes);
-app.use("/players", playersRoutes);
-app.use("/auth", authRoutes);
+// Routes 
+app.use("pages", pagesRoutes);
+app.use("players", playersRoutes);
+app.use("auth", authRoutes);
 
 // Route racine
 app.get("/", (req, res) => {
