@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Middleware CORS pour autoriser le front
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
@@ -32,5 +32,5 @@ app.get("/", (req, res) => {
 
 // Démarrage serveur
 app.listen(PORT, () => {
-  console.log(`Serveur lancé sur http://localhost:${PORT}`);
+  console.log(`Serveur lancé sur le port ${PORT}`);
 });
