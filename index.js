@@ -23,9 +23,9 @@ app.use(cors({
 }));
 
 // Routes 
-app.use("pages", pagesRoutes);
-app.use("players", playersRoutes);
-app.use("auth", authRoutes);
+app.use("/pages", pagesRoutes);
+app.use("/players", playersRoutes);
+app.use("/auth", authRoutes);
 
 // Route racine
 app.get("/", (req, res) => {
