@@ -126,7 +126,7 @@ let pages = [
       { "label": "Vous tentez de l'ouvrir", "nextId": 378, "available": true },
       {
         "label": "Vous préférez rebrousser chemin et partir dans la direction opposée",
-        "nextId": 265, "available": false
+        "nextId": 265, "available": true
       }
     ]
   },
@@ -312,9 +312,9 @@ let pages = [
     "id": 265,
     "description": "Dans le mur droit, vous remarquez une petite porte qui ne doit pas dépasser un mètre de haut, et qui n'est fermée que par un simple loquet.",
     "choices": [
-      { "label": "", "nextId": 84, "available": true },
+      { "label": "Vous ouvrez la porte et entrez", "nextId": 84, "available": true },
       {
-        "label": "",
+        "label": "Vous ignorez la porte et continuez dans le couloir",
         "nextId": 202, "available": true
       }
     ]
