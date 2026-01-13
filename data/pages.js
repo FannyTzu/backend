@@ -31,7 +31,7 @@ let pages = [
       "state": "ONGOING",
       "enemies": {
         "type": "ZOMBIE",
-        "count": 7,
+        "count": 60,
         "power": 1
       },
       "dice": {
@@ -57,7 +57,7 @@ let pages = [
   },
   {
     "id": 36,
-    "description": "Le sac contient une clé en fer, sur laqueklle est gravé le chiffre 9, une boite d'allumette et un feutre que vous pouvez emporter avec vous, ainsi que le sac, si vous en êtes démuni.",
+    "description": "Le sac contient une clé en fer, sur laquelle est gravé le chiffre 9, une boite d'allumette et un feutre que vous pouvez emporter avec vous, ainsi que le sac, si vous en êtes démuni.",
     "choices": [
       { "label": "Vous reprenez votre chemin dans le couloir", "nextId": 391, "available": true }
     ],
@@ -172,7 +172,7 @@ let pages = [
   },
   {
     "id": 136,
-    "description": "L'un des Zombies tenait un pistolet (1d+2). En griaçant, vous le tirez de ses énormes doigts. Il vous semble en parfait état de marche mais n'est pas chargé, si vous possédez des munitions, il vous sera utile ! En poursuivant votre chemin, vous remarquez une grande caisse en bois posé un côté d'un regard fermé par un couvercle de fer. ",
+    "description": "L'un des Zombies tenait un pistolet (1d+2). En grimaçant, vous le tirez de ses énormes doigts. Il vous semble en parfait état de marche mais n'est pas chargé, si vous possédez des munitions, il vous sera utile ! En poursuivant votre chemin, vous remarquez une grande caisse en bois posé un côté d'un regard fermé par un couvercle de fer. ",
     "choices": [
       {
         "label": "Vous ouvrez la caisse",
