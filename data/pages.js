@@ -31,7 +31,7 @@ let pages = [
       "state": "ONGOING",
       "enemies": {
         "type": "ZOMBIE",
-        "count": 60,
+        "count": 2,
         "power": 1
       },
       "dice": {
