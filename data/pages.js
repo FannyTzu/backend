@@ -31,7 +31,7 @@ let pages = [
       "state": "ONGOING",
       "enemies": {
         "type": "ZOMBIE",
-        "count": 2,
+        "count": 2,   //2
         "power": 1
       },
       "dice": {
@@ -62,7 +62,7 @@ let pages = [
       { "label": "Vous reprenez votre chemin dans le couloir", "nextId": 391, "available": true }
     ],
     "items": [
-      { "weapons": "", "power": 0, "dé": 0 },
+      { "weapons": "" },
       { "money": 0 },
       { "stuff": ["sac à dos", "clé en fer n°9", "allumettes"] }
     ]
@@ -138,7 +138,7 @@ let pages = [
       "state": "ONGOING",
       "enemies": {
         "type": "ZOMBIE",
-        "count": 4,
+        "count": 4, //4
         "power": 1
       },
       "dice": {
@@ -188,7 +188,7 @@ let pages = [
       }
     ],
     "items": [
-      { "weapons": "pistolet", "power": 2, "dé": 1 },
+      { "weapons": "pistolet" },
       { "money": 0 },
       { "stuff": [] }
     ]
@@ -220,7 +220,7 @@ let pages = [
     "description": "La boite contien un petit canif, 15 pièces et une pelote de ficelle, vous rangez tout ça dans votre sac et regagnez le couloir.",
     "choices": [{ "label": "Vous regagnez le couloir", "nextId": 93, "available": true }],
     "items": [
-      { "weapons": "canif", "power": 2, "dé": 1 },
+      { "weapons": "canif" },
       { "money": 15 },
       { "stuff": ["pelote de ficelle"] }
     ]
@@ -264,13 +264,13 @@ let pages = [
   },
   {
     "id": 235,
-    "description": "Vous vous débarassez desdeux zombies qui à lévidence n'étaient pas les plus nerveux. Mais vous êtes bien conscient que si vous ne trouvez pas une arme, vous ne viendrez pas à bout d'une horde. Les ecartant du pied, vous vous approchez de l'armoire, vous trouvez une trousse de soin qui vous fait gagner 4 points d'endurance, vous trouvez également 2 boites de balles.",
+    "description": "Vous vous débarassez desdeux zombies qui à lévidence n'étaient pas les plus nerveux. Mais vous êtes bien conscient que si vous ne trouvez pas une arme, vous ne viendrez pas à bout d'une horde. Les ecartant du pied, vous vous approchez de l'armoire, vous trouvez une trousse de soin qui vous fait gagner 4 points d'endurance.",
     "choices": [
       { "label": "Vous sortez de la buanderie et retournez dans le couloir", "nextId": 265, "available": true }
     ],
     "impact": [{ "endurance": 4 }, { "money": 0 }],
     "items": [
-      { "weapons": "munitions", "power": 2, "dé": 1 },
+      { "weapons": "" },
       { "money": 0 },
       { "stuff": [""] }
     ]
@@ -283,7 +283,7 @@ let pages = [
       "state": "ONGOING",
       "enemies": {
         "type": "ZOMBIE",
-        "count": 8,
+        "count": 8,  //8
         "power": 1
       },
       "dice": {
@@ -357,7 +357,7 @@ let pages = [
   },
   {
     "id": 345,
-    "description": "Vous attaquez Otto et ça fonctionne ! il tombe et s'assome, vous en proftez pour voler les clés et vous libérez, c'est peut le moment pour lui poser quelques questions ?",
+    "description": "Vous attaquez Otto et ça fonctionne ! il tombe et s'assome, vous en proftez pour voler les clés et vous libérez, c'est peut être le moment pour lui poser quelques questions ?",
     "choices": [
       { "label": "Vous l'attachez et décidez de l'interroger", "nextId": 21, "available": true },
       { "label": "Vous quittez ce cachot en courant !", "nextId": 73, "available": true }
@@ -409,9 +409,9 @@ let pages = [
       }
     ],
     "items": [
-      { "weapons": "Pince de forge" },
+      { "weapons": "" },
       { "money": 0 },
-      { "stuff": [""] }
+      { "stuff": ["Pince de forge"] }
     ]
   }
 ];
