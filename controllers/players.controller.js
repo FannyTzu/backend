@@ -1,5 +1,6 @@
 import { pool } from "../database/db.js";
 import { pages } from "../data/pages.js";
+import { weaponsPower } from "../data/weapons.js";
 
 export const getAllPlayers = async (req, res) => {
   try {
@@ -237,7 +238,7 @@ export const resetPlayer = async (req, res) => {
           current_page_id = $5
       WHERE id = $6 AND user_id = $7
        RETURNING *`,
-      [40, 0, [], [], 1, playerId, userId]
+      [20, 0, [], [], 1, playerId, userId]
     );
 
     if (result.rows.length === 0) {
@@ -257,34 +258,49 @@ export const resetPlayer = async (req, res) => {
 export const rollCombatDice = async (req, res) => {
   const playerId = Number(req.params.id);
   const userId = req.userId;
-
-  // 1️⃣ Récupérer le joueur et le combat en cours
+  // 1️⃣ Récupérer le joueur et le combat en cours (inclut les armes)
   const result = await pool.query(
-    "SELECT endurance, combat_state FROM players WHERE id = $1 AND user_id = $2",
+    "SELECT endurance, combat_state, weapons FROM players WHERE id = $1 AND user_id = $2",
     [playerId, userId]
   );
 
   const player = result.rows[0];
-  if (!player.combat_state) {
+  if (!player || !player.combat_state) {
     return res.status(400).json({ message: "Pas de combat en cours" });
   }
 
   let { remainingEnemies, enemyPower, diceFaces, pageId } = player.combat_state;
 
+  // helper: retourne la puissance de l'arme la plus puissante possédée (0 si aucune)
+  const getBestWeaponPower = (playerWeapons) => {
+    if (!playerWeapons || playerWeapons.length === 0) return 0;
+    const owned = new Set(playerWeapons);
+    let best = 0;
+    for (const w of weaponsPower) {
+      if (owned.has(w.name) && typeof w.power === 'number') {
+        if (w.power > best) best = w.power;
+      }
+    }
+    return best;
+  };
+
   // 2️⃣ Lancer de dé
   const roll = Math.floor(Math.random() * diceFaces) + 1;
 
-  // 3️⃣ Dégâts : nombre d’ennemis tués
-  const kills = Math.min(roll, remainingEnemies);
+  // 3️⃣ Bonus d'arme : uniquement l'arme la plus puissante
+  const weaponBonus = getBestWeaponPower(player.weapons);
+
+  // 4️⃣ Dégâts : nombre d’ennemis tués (limité au nombre d'ennemis restants)
+  const kills = Math.min(roll + weaponBonus, remainingEnemies);
   remainingEnemies -= kills;
 
-  // 4️⃣ Contre-attaque : dégâts subis
-  let enduranceLoss = remainingEnemies * enemyPower;
-  let newEndurance = player.endurance - enduranceLoss;
+  // 5️⃣ Contre-attaque : dégâts subis
+  const enduranceLoss = remainingEnemies * enemyPower;
+  const newEndurance = player.endurance - enduranceLoss;
 
   const page = pages.find(p => p.id === pageId);
 
-  // 5️⃣ Défaite
+  // 6️⃣ Défaite
   if (newEndurance <= 0) {
     await pool.query(
       "UPDATE players SET endurance = 0, combat_state = NULL, status = 'DEAD' WHERE id = $1",
@@ -293,28 +309,28 @@ export const rollCombatDice = async (req, res) => {
 
     return res.json({
       status: "DEAD",
-      deathTextId: page.onLose.deathTextId,
+      deathTextId: page?.onLose?.deathTextId ?? null,
       roll,
       kills
     });
   }
 
-  // 6️⃣ Victoire
+  // 7️⃣ Victoire
   if (remainingEnemies <= 0) {
     await pool.query(
       "UPDATE players SET combat_state = NULL, endurance = $1, current_page_id = $2 WHERE id = $3",
-      [newEndurance, page.onWin, playerId]
+      [newEndurance, page?.onWin ?? null, playerId]
     );
 
     return res.json({
       status: "COMBAT_WON",
       roll,
       kills,
-      nextPageId: page.onWin
+      nextPageId: page?.onWin ?? null
     });
   }
 
-  // 7️⃣ Combat continue
+  // 8️⃣ Combat continue
   const newCombatState = {
     ...player.combat_state,
     remainingEnemies
